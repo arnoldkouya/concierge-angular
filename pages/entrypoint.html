@@ -1,0 +1,48 @@
+<div class="row">
+	<div class="col-md-8">
+		<accordion close-others="true">
+			<accordion-group ng-repeat="queue in queues" ng-click="showVisits(queue.id)" is-open="queue.open">
+				<accordion-heading>
+					{{ queue.name }} <span class="pull-right">{{ formatTime(queue.waitingTime) }}  <span class="badge">{{ queue.customersWaiting }}</span></span>
+				</accordion-heading>
+				<table class="table table-condensed table-striped">
+					<tbody>
+						<tr ng-repeat="visit in visits">
+							<td><strong>{{ visit.ticketId }}</strong></td>
+							<td style="width: 100%;">&nbsp;</td>
+							<td class="pull-right">{{ formatTime(visit.waitingTime) }}</td>
+						</tr>
+					</tbody>
+				</table>
+			</accordion-group>
+		</accordion>
+	</div>
+	<div class="col-md-4">
+		  <div class="panel panel-default">
+		    <div class="panel-heading">
+		      <h3 class="panel-title">Customer</h3>
+		    </div>
+		    <div class="panel-body">
+					<form name="visitForm" role="form" ng-submit="createVisit()">
+					  <div class="form-group">
+					    <label for="customerName">Name</label>
+					    <input type="text" class="form-control" placeholder="Customer Name" ng-model="visit.parameters.customerName" required></input>
+					  </div>
+					  <div class="form-group">
+					    <label for="mobile">Mobile Number</label>
+							<!-- edit the input pattern regex to match the required format for phone numbers you require -->
+					    <input type="tel" class="form-control" placeholder="Mobile Number" ng-model="visit.parameters.mobile" pattern="^(?:\+44)?[7]\d{9}$" required></input>
+					  </div>
+					  <div class="form-group">
+					    <label for="service">Service(s)</label>
+							<select multiple class="form-control" ng-model="visit.services" ng-options="service.id as service.internalName for service in services" required></select>
+					  </div>
+					  <button type="submit" class="btn btn-primary btn-lg btn-block" ng-disabled="!visitForm.$valid">
+						  <i class="fa fa-plus"></i> Create
+					  </button>
+				  </form>
+		    </div>
+		  </div>
+			<alert ng-repeat="alert in alerts" type="{{alert.type}}">{{ alert.msg }}</alert>
+	</div>
+</div>

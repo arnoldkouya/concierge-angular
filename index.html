@@ -1,0 +1,85 @@
+<!doctype html>
+<html ng-app="concierge">
+	<head>
+    <title>Concierge</title>
+		
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+		<meta name="viewport" id="vp" content="initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width" />
+		<meta name="viewport" id="vp" content="initial-scale=1.0,user-scalable=no,maximum-scale=1" media="(device-height: 568px)" />
+		<meta http-equiv="cleartype" content="on">
+    <meta name="msapplication-TileImage" content="img/touch/apple-touch-icon-144x144-precomposed.png">
+    <meta name="msapplication-TileColor" content="#222222">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Concierge">
+		
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/touch/apple-touch-icon-144x144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/touch/apple-touch-icon-114x114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/touch/apple-touch-icon-72x72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="img/touch/apple-touch-icon-57x57-precomposed.png">
+    <link rel="shortcut icon" href="img/touch/apple-touch-icon.png">
+		
+		<link rel="stylesheet" href="css/lib/bootstrap.min.css" />
+		<link rel="stylesheet" href="css/lib/font-awesome.min.css" />
+		<link rel="stylesheet" href="css/style.css" />
+		
+		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="js/lib/html5shiv.min.js"></script>
+      <script src="js/lib/respond.min.js"></script>
+    <![endif]-->
+	</head>
+	
+	<body>
+		
+		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" ng-controller="mainController">
+			<br/>
+			<a class="navbar-brand" href="#">Qmatic</a>
+			<p class="navbar-text pull-right user-info">
+				<a href="login.jsp" class="btn btn-primary btn-sm pull-right"><i class="fa fa-power-off"></i></a>
+			</p>
+			<p class="navbar-text pull-right user-info">
+				<a href="../home.html" class="btn btn-primary btn-sm pull-right"><i class="fa fa-home"></i></a>
+			</p>
+			<p class="navbar-text pull-right user-info">{{ user.fullName }}</p>
+		</nav>
+		
+		<div class="container">
+			<div ui-view></div>
+		</div>
+		
+		<script type="text/ng-template" id="settings.html">
+    	<div class="modal-header">
+      	<h3 class="modal-title">Settings</h3>
+      </div>
+      <div class="modal-body">
+				<form role="form">
+				  <div class="form-group">
+				    <label for="branch">Branch</label>
+						<select class="form-control" ng-model="settings.branch" ng-change="selectBranch()" ng-options="branch.id as branch.name for branch in branches" required></select>
+				  </div>
+				  <div class="form-group">
+				    <label for="entrypoint">EntryPoint</label>
+						<select class="form-control" ng-model="settings.entryPoint" ng-options="entrypoint.id as entrypoint.name for entrypoint in entrypoints" required></select>
+				  </div>
+				</form>
+      </div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" ng-click="ok()" ng-disabled="!settingsOK()">OK</button>
+			</div>
+    </script>
+		
+		<script src="js/lib/angular.min.js"></script>
+		<script src="js/lib/angular-ui-router.min.js"></script>
+		<script src="js/lib/angular-resource.min.js"></script>
+		<script src="js/lib/ui-bootstrap-tpls.min.js"></script>
+		<script src="js/lib/sessvars.js"></script>
+		
+		<script src="js/app.js"></script>
+		<script src="js/services.js"></script>
+		<script src="js/controllers.js"></script>
+	</body>
+</html>
